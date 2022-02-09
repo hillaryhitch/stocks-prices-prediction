@@ -84,7 +84,7 @@ The solution is built on pyhton 3.8.7:
 
   pandas-datareader==0.10.0
   
- #To do
+ # To do
  
  1. Include a progress bar (code already in place but commented out)
  2. Cache already traianed models on different dates and outcomes to make the dashboard run faster
