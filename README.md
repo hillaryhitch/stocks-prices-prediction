@@ -136,6 +136,19 @@ I tuned the XGBOOST regressor using randomized search; the results improved marg
 
 
 
+# H2o AutoML Ensembles:
+
+I went ahead to try h2o automl but got worse results:
+
+    1. MAPE of 17.675466462433885 for window 1
+    
+    2. MAPE of 17.218327973193198 for window 2
+    
+    3. MAPE of 17.513003431351507 for window 3
+    
+    
+    
+    
 
 # Stocks forecasting-Dashboard
 
