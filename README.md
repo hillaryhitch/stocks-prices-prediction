@@ -147,7 +147,9 @@ I went ahead to try h2o automl but got worse results:
     3. MAPE of 17.513003431351507 for window 3
     
     
-    
+# Results
+
+Since the best performing model is still the good old ARIMA, I will use it in my deployment.
     
 
 # Stocks forecasting-Dashboard
