@@ -233,8 +233,7 @@ corporate_colorscale = [
 
 
 @app.callback(
-    [dash.dependencies.Output('recap-table', 'data'), dash.dependencies.Output('recap-table', 'columns'), dash.dependencies.Output('recap-table', 'style_data_conditional')],
-	[dash.dependencies.Output('pred', 'figure')],
+    [dash.dependencies.Output('recap-table', 'data'), dash.dependencies.Output('recap-table', 'columns'), dash.dependencies.Output('recap-table', 'style_data_conditional'),dash.dependencies.Output('pred', 'figure')],
     [dash.dependencies.State('date-picker-price', 'start_date'),
 	 dash.dependencies.State('date-picker-price', 'end_date'),
      dash.dependencies.State('l1_tickers', 'value'),
@@ -325,82 +324,3 @@ def get_data(start_date, end_date, l1_tickers, date,l2_model_cnt,clicks,start,en
         # h2o.shutdown()
         return data, columns, conditional_style,fig
 
-####################################################################################################
-# 003 - SALES COUNT DAY
-# ####################################################################################################
-# @app.callback(
-#     dash.dependencies.Output('sales-count-day', 'figure'),
-# 	[dash.dependencies.Input('date-picker-sales', 'start_date'),
-# 	 dash.dependencies.Input('date-picker-sales', 'end_date'),
-#      dash.dependencies.Input('reporting-groups-l1dropdown-sales', 'value'),
-#      dash.dependencies.Input('reporting-groups-l2dropdown-sales', 'value')])
-# def update_chart(start_date, end_date, reporting_l1_dropdown, reporting_l2_dropdown):
-#     start = dt.strptime(start_date, '%Y-%m-%d')
-#     end = dt.strptime(end_date, '%Y-%m-%d')
-
-#     # Filter based on the dropdowns
-#     isselect_all_l1 = 'Start' #Initialize isselect_all
-#     isselect_all_l2 = 'Start' #Initialize isselect_all
-#     ## L1 selection (dropdown value is a list!)
-#     for i in reporting_l1_dropdown:
-#         if i == 'All':
-#             isselect_all_l1 = 'Y'
-#             break
-#         elif i != '':
-#             isselect_all_l1 = 'N'
-#         else:
-#             pass
-#     # Filter df according to selection
-#     if isselect_all_l1 == 'N':
-#         sales_df_1 = sales_import.loc[sales_import[sales_fields['reporting_group_l1']].isin(reporting_l1_dropdown), : ].copy()
-#     else:
-#         sales_df_1 = sales_import.copy()
-#     ## L2 selection (dropdown value is a list!)
-#     for i in reporting_l2_dropdown:
-#         if i == 'All':
-#             isselect_all_l2 = 'Y'
-#             break
-#         elif i != '':
-#             isselect_all_l2 = 'N'
-#         else:
-#             pass
-#     # Filter df according to selection
-#     if isselect_all_l2 == 'N':
-#         sales_df = sales_df_1.loc[sales_df_1[sales_fields['reporting_group_l2']].isin(reporting_l2_dropdown), :].copy()
-#     else:
-#         sales_df = sales_df_1.copy()
-#     del sales_df_1
-
-#     #Aggregate df
-#     val_cols = [sales_fields['sales'],sales_fields['sales target']]
-#     sales_df = sales_df.groupby(sales_fields['date'])[val_cols].agg('sum')
-#     sales_df.reset_index(inplace=True)
-
-#     # Filter based on the date filters
-#     df = sales_df.loc[(sales_df[sales_fields['date']]>=start) & (sales_df[sales_fields['date']]<=end), :].copy()
-#     del sales_df
-
-#     # Build graph
-#     hovertemplate_xy = (
-#     "<i>Day</i>: %{x|%a, %d-%b-%Y}<br>"+
-#     "<i>Sales</i>: %{y:,d}"+
-#     "<extra></extra>") # Remove trace info
-#     data = go.Scatter(
-#         x = df[sales_fields['date']],
-#         y = df[sales_fields['sales']],
-#         line = {'color' : corporate_colors['light-green'], 'width' : 0.5},
-#         hovertemplate = hovertemplate_xy)
-#     fig = go.Figure(data=data, layout=corporate_layout)
-#     fig.update_layout(
-#         title={'text' : "Sales per Day"},
-#         xaxis = {
-#             'title' : "Day",
-#             'tickformat' : "%d-%m-%y"},
-#         yaxis = {
-#             'title' : "Sales (units)",
-#             'range' : [0, 100000]},
-#         showlegend = False)
-
-#     return fig
-
-####################################################################################################
