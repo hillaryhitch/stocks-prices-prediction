@@ -1,3 +1,142 @@
+# Project Overview
+
+The stock market has alwaay been a sort of black box inn its performance. 
+Investors have tried multiple ways to predict future prices in order to make the right investment. 
+It has been an area of interest for me  not only because of the money one can make; but also the power one would have over multiple companies.
+
+Is it possible to accurately predict stock prices? 
+According to Burton Malkiel , an American economist and author; stocks have unpredictable and random behaviour, this makes all methods of prediction unreliable.
+In the recent years, because of advancement in technology, multiple prediction methods have been developed among them machine learning.
+
+In this project, I will start a journey of predicting stock prices
+
+
+# Problem Statement
+
+The main objective of this project is to predict stock prices using machine learning.
+
+The main challenge is to allow the user to select whichever stock they are interested in as well as prediction dates.
+
+I will build a solution that includes:
+    
+1. Uses stock price data from Yahoo Finance
+
+2. Perform all machine learning steps including training multiple models, validating the models
+
+3. A python dash dashboard that acts as a user interface to select:
+    
+
+    a. A start and end date to train a model
+    
+    b. A start and end date to predict
+    
+    c. A date to validate and see the models performance
+    
+    d. Number of models to explore in h2o
+    
+    e. Symbols to be predicted (multiple or one)
+    
+    The user will see:
+
+        a. A table with the best trained models performance
+        
+        b. A graph with all symbol predictions
+
+
+# Metrics
+
+The method that will be used is regression and the metric of interest will be MAPE ( mean absolute percentage error).
+
+
+![list](https://github.com/hillaryhitch/stocks-prices-prediction/blob/main/Screenshot%202022-02-09%20at%2022.22.19.png)
+
+This measure is easy to understand because it provides the error in terms of percentages. 
+
+Also, because absolute percentage errors are used, the problem of positive and negative errors canceling each other out is avoided. Consequently, MAPE is a measure commonly used in forecasting. 
+
+The smaller the MAPE the better the forecast and the more profit we can make since we have the correct future information.
+
+
+
+# EDA
+
+Since we have to build a solution to predict any symbol from the stocks, we wont be able to explore all symbols, but we will use 'GS' for data exploration annd model building.
+
+I choose 'GS' not because of any good generalization, but simply because I have history with their stocks.
+
+We will use pandas_datareader to get the stock closing prices from Yahoo.
+
+
+![list](https://github.com/hillaryhitch/stocks-prices-prediction/blob/main/Screenshot%202022-02-09%20at%2022.29.51.png)
+
+
+## Visualizations
+
+![list](https://github.com/hillaryhitch/stocks-prices-prediction/blob/main/Screenshot%202022-02-09%20at%2022.33.00.png)
+
+
+There was a dip around March 2020, this is expected because it was the start of Corona. The stock prices however started growing from then.
+
+There is some signal in the date features because we can see clear seasonal effects as below- there is always a dip in the 4th week of every month, current years have had the biggest growths:
+    
+![list](https://github.com/hillaryhitch/stocks-prices-prediction/blob/main/Screenshot%202022-02-09%20at%2022.59.17.png)
+
+![list](https://github.com/hillaryhitch/stocks-prices-prediction/blob/main/Screenshot%202022-02-09%20at%2022.59.23.png)
+
+
+The plot below shows that the cumulative log returns for GS looks like it has hit a plateau in the recent months;
+
+![list](https://github.com/hillaryhitch/stocks-prices-prediction/blob/main/Screenshot%202022-02-09%20at%2022.44.11.png)
+
+## Since we see some seasonality in the dates, we can create date features and try regression
+
+
+# Modelling
+
+## Baseline
+
+I built a baseline using ARIMA, since its a good statistical to go to model for time series. 
+
+An autoregressive integrated moving average (ARIMA) model is a generalization of an autoregressive moving average (ARMA) model. Both of these models are fitted to time series data either to better understand the data or to predict future points in the series (forecasting). ARIMA models are applied in some cases where data show evidence of non-stationarity, where an initial differencing step (corresponding to the "integrated" part of the model) can be applied one or more times to eliminate the non-stationarity. ARIMA model is of the form: ARIMA(p,d,q): p is AR parameter, d is differential parameter, q is MA parameter
+
+I devided the data into 4 windows- the train, and 3 validation sets (from future data)
+
+The results are as below:
+    
+   1. 4.7% MAPE for window 1
+   
+   
+   2. 5.1% MAPE for window 2
+   
+   
+   3. 5.7% MAPE for window 3
+   
+The MAPE increases the further we go in the future
+
+
+### XGBOOST
+
+XGBOOST regressor with date features had the perfomance below:
+
+    1. MAPE of 9.4% for window 1
+    
+    2. MAPE of 9.2% for window 2
+    
+    3. MAPE of 12.9% for window 3
+    
+# Hyper Parameter Tuning
+
+I tuned the XGBOOST regressor using randomized search; the results improved marginally:
+
+    1. MAPE of 8.07% for window 1
+    
+    2. MAPE of 7.69% for window 2
+    
+    3. MAPE of 11.94% for window 3
+
+
+
+
 # Stocks forecasting-Dashboard
 
 ![list](https://github.com/hillaryhitch/stocks-prices-prediction/blob/main/Screenshot%202022-02-08%20at%2016.00.08.png)
