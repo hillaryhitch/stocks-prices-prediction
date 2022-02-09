@@ -77,7 +77,7 @@ We will use pandas_datareader to get the stock closing prices from Yahoo.
 
 There was a dip around March 2020, this is expected because it was the start of Corona. The stock prices however started growing from then.
 
-There is some signal in the date features because we can see clear seasonal effects as below- there is always a dip in the 4th week of every month, current years have had the biggest growths:
+There is some signal in the date features because we can see clear seasonal effects as below- there is always a dip in the 4th week of Jan,Feb,Mar,May,Sep,Dec, current years have had the biggest growths:
     
 ![list](https://github.com/hillaryhitch/stocks-prices-prediction/blob/main/Screenshot%202022-02-09%20at%2022.59.17.png)
 
