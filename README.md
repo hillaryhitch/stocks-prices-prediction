@@ -4,7 +4,9 @@
 
 # Summary
 
-This is a stocks prediction udacity nano degree capstone project. I basically changed it into a normal regression problem and used h2o autoML to train my models
+This is a stocks prediction udacity nano degree capstone project. I basically changed it into a normal regression problem and used h2o autoML to train my models.
+
+The metric of interest for this project is MAPE (mean absolute percentage error)
 
 The project has 3 parts:
 
