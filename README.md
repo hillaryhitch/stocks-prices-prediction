@@ -149,8 +149,7 @@ I went ahead to try h2o automl but got worse results:
     
 # Results
 
-Since the best performing model is still the good old ARIMA, I will use it in my deployment.
-    
+Even though ARIMA had the best short term performance, it does bad in long term predictions. In the deployment I used H2o as my models because it is more stable.    
 
 # Stocks forecasting-Dashboard
 
@@ -158,25 +157,17 @@ Since the best performing model is still the good old ARIMA, I will use it in my
 
 # Summary
 
-This is a stocks prediction udacity nano degree capstone project. I basically changed it into a normal regression problem and used h2o autoML to train my models.
-
-The metric of interest for this project is MAPE (mean absolute percentage error)
-
-The project has 3 parts:
-
-1. Modelling (methods initially built in a jupyter notebook)
-2. User dashboard , written in Python and including layout customisations with .css bootstrap.
+The models are called by the user on a dashboard; written in Python and including layout customisations with .css bootstrap.
 The app has been deployed on Heroku and is visible here: https://stocks-prices-prediction-py.herokuapp.com/
-
-The data used is historical adjusted closing prices downloaaded from yahoofinance using pandas_datareader. The inputs and outputs are all presented inform of a dash dashboard, the dashboard is open enough to give the user power to select multiple parameters.
 
 The user can select:
 
 1. A start and end date to train a model 
 2. a start and end date to predict 
-3. A datae to validate and see the models performance
-4. Number of models to explore in h2o
-5. Symbols to be predicted (multiple or one)
+3. A date to validate and see the models performance
+4. Symbols to be predicted (multiple or one)
+5. Number of models to explore
+6. User clicks compute for training and results. The training might take 2mins
 
 The user will see:
 
@@ -238,10 +229,16 @@ The solution is built on pyhton 3.8.7:
 
   pandas-datareader==0.10.0
   
- # To do
+ # Conclusions
  
- 1. Include a progress bar (code already in place but commented out)
- 2. Cache already traianed models on different dates and outcomes to make the dashboard run faster
+ I was able to predict stock maarket in the short term with less than 5% MAPE but with worse MAPE in longer prediction periods. 
+ 
+ # Improvements
+ 
+ 1. More work can be done to make the models better by including external data especially socail media data and other sites like reddit
+ 2. More work can be done in tuning the models for only specific symbols and not all
+ 3. For the dashboard, one can include a progress bar (code already in place but commented out)
+ 4. Cache already trained models on different dates and outcomes to make the dashboard run faster
  
 
 # Acknowledgement
