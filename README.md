@@ -149,7 +149,9 @@ I went ahead to try h2o automl but got worse results:
     
 # Results
 
-Even though ARIMA had the best short term performance, it does bad in long term predictions. In the deployment I used H2o as my models because it is more stable.    
+Even though ARIMA had the best short term performance, it does bad in long term predictions. In the deployment I used H2o as my models because it is more stable.   
+
+![list](Screenshot 2022-02-10 at 03.01.46.png)
 
 # Stocks forecasting-Dashboard
 
