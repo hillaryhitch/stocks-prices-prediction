@@ -1,6 +1,6 @@
 # Project Overview
 
-The stock market has alwaay been a sort of black box inn its performance. 
+The stock market has always been a sort of black box inn its performance. 
 Investors have tried multiple ways to predict future prices in order to make the right investment. 
 It has been an area of interest for me  not only because of the money one can make; but also the power one would have over multiple companies.
 
@@ -56,7 +56,11 @@ Also, because absolute percentage errors are used, the problem of positive and n
 
 The smaller the MAPE the better the forecast and the more profit we can make since we have the correct future information.
 
+# Data Processing
 
+The data I will be using is from yahoo finance, downloaded by pandas.dataset. I created a loop to find all symbols available in yahoo finance at a given time and used these symbols as my list of tickers in the final dashboard.
+
+The data misses weekend information, I imputed with mean. Nothing else is necessary interms of data processing.
 
 # EDA
 
@@ -113,6 +117,7 @@ The results are as below:
    
 The MAPE increases the further we go in the future
 
+# Model Evaluation and Validation
 
 ### XGBOOST
 
@@ -124,9 +129,27 @@ XGBOOST regressor with date features had the perfomance below:
     
     3. MAPE of 12.9% for window 3
     
-# Hyper Parameter Tuning
+## Hyper Parameter Tuning
 
-I tuned the XGBOOST regressor using randomized search; the results improved marginally:
+I tuned the XGBOOST regressor using randomized search; I used randomized search because it is faster. 
+
+The parameter space used was as below:
+
+params = {
+    'n_estimators':[500],
+    'min_child_weight':[4,5], 
+    'gamma':[i/10.0 for i in range(3,6)],  
+    'subsample':[i/10.0 for i in range(6,11)],
+    'colsample_bytree':[i/10.0 for i in range(6,11)], 
+    'max_depth': [2,3,4,6,7],
+    'objective': ['reg:squarederror', 'reg:tweedie'],
+    'booster': ['gbtree', 'gblinear'],
+    'eval_metric': ['rmse'],
+    'eta': [i/10.0 for i in range(3,6)],
+}
+
+
+The best paramaters were picked from the randomized cross validation. The results improved marginally:
 
     1. MAPE of 8.07% for window 1
     
@@ -136,7 +159,7 @@ I tuned the XGBOOST regressor using randomized search; the results improved marg
 
 
 
-# H2o AutoML Ensembles:
+## H2o AutoML Ensembles:
 
 I went ahead to try h2o automl but got worse results:
 
